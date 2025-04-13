@@ -34,5 +34,6 @@ class GeminiEmbeddings(Embeddings):
 
 # Load the retriever from disk
 embedding = GeminiEmbeddings()
-db = Chroma(persist_directory="chroma_gemini_db", embedding_function=embedding)
+db = Chroma(embedding_function=embedding)  # In-memory mode
+
 retriever = db.as_retriever(search_kwargs={"k": 3})

@@ -41,7 +41,7 @@ import google.generativeai as genai
 
 genai.configure(api_key=api_key)
 
-gemini_llm1 = ChatGoogleGenerativeAI(model="gemini-2.0-flash", temperature=0.2)
+gemini_llm1 = ChatGoogleGenerativeAI(model="gemini-2.0-flash", temperature=0.7)
 gemini_llm2 = ChatGoogleGenerativeAI(model="gemini-2.0-flash", temperature=0.9)
 
 def is_safe_input(user_input):
@@ -98,11 +98,6 @@ chatbot_chain = SequentialChain(
     verbose=True
 )
 
-class MentalHealthChatbot:
-    def __init__(self):
-        self.chain = chatbot_chain
-
-    from embeddings import retriever
 
 class MentalHealthChatbot:
     def __init__(self):

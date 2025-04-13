@@ -1,0 +1,18 @@
+# Core language model and AI libraries
+langchain
+langchain-community
+langchain-google-genai
+openai
+google-generativeai
+
+# Vector store and embeddings
+chromadb
+transformers
+sentence-transformers
+
+# Web interface
+streamlit
+
+# (Optional, for safety)
+tqdm
+python-dotenv

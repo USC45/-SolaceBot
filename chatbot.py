@@ -26,7 +26,7 @@ from langchain_community.embeddings import HuggingFaceEmbeddings  # if used
 from langchain.chat_models import ChatOpenAI
 from langchain_google_genai import ChatGoogleGenerativeAI
 from langchain_google_genai import ChatGoogleGenerativeAI
-from embeddings import retriever
+#from embeddings import retriever
 
 import getpass
 import os

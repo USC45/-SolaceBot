@@ -134,9 +134,9 @@ class MentalHealthChatbot:
             return "I'm really sorry you're feeling this way. Please consider reaching out to a professional or a trusted person for support."
 
         # 🧠 Use retriever to fetch relevant content
-        docs = retriever.invoke(user_input)
+        #docs = retriever.invoke(user_input)
 
-        context = "\n".join([doc.page_content for doc in docs])
+        #context = "\n".join([doc.page_content for doc in docs])
 
         # 💡 You can use context to improve LLM response
         full_input = f"{user_input}\n\nRelevant Info:\n{context}"

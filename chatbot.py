@@ -59,10 +59,10 @@ memory = ConversationBufferMemory(
 )
 
 summary_prompt = PromptTemplate(
-    input_variables=["user_question"],
+    input_variables=["user_input"],
     template="""
 Summarize the following message to identify the user's emotional concern clearly:
-{user_question}
+{user_input}
 Summary:
 """
 )
@@ -81,39 +81,18 @@ Response:
 
 """
 )
-validate_or_rewrite_prompt = PromptTemplate(
-    input_variables=["user_input", "bot_response"],
-    template="""
-You are a helpful assistant reviewing a chatbot response to a user’s emotional message.
 
-Step 1: Determine if the bot’s response is emotionally relevant and actually addresses the user’s need or question.
-Step 2: If the response is vague, repetitive, or not helpful, browse the web get relevant answer rewrite it with empathy and a clear focus on what the user asked.
-Step 3: Keep it under 3 sentences longer only if needed and avoid generic reassurance unless it fits the context.
-
-User Message:
-{user_input}
-
-Bot's Original Response:
-{bot_response}
-
-Final (Validated or Improved) Response:
-"""
-)
 
 
 from langchain.chains import LLMChain, SequentialChain
 
 summary_chain = LLMChain(llm=gemini_llm1, prompt=summary_prompt, output_key="summarized_question")
 answer_chain = LLMChain(llm=gemini_llm1, prompt=answer_prompt, output_key="gemini_response")
-validate_chain = LLMChain(
-    llm=gemini_llm1,
-    prompt=validate_or_rewrite_prompt,
-    output_key="final_response"
-)
+
 
 chatbot_chain = SequentialChain(
-    chains=[summary_chain, answer_chain, validate_chain],
-    input_variables=["user_question"],
+    chains=[summary_chain, answer_chain],
+    input_variables=["user_input"],
     output_variables=["gemini_response"],
     memory=memory,
     verbose=True
@@ -139,9 +118,9 @@ class MentalHealthChatbot:
         #context = "\n".join([doc.page_content for doc in docs])
 
         # 💡 You can use context to improve LLM response
-        full_input = f"{user_input}\n\nRelevant Info:\n{context}"
+        #full_input = f"{user_input}\n\nRelevant Info:\n{context}"
 
         # Run the chain
-        response = self.chain.run({"user_question": full_input})
+        response = self.chain.run({"user_input": full_input})
         return response
 

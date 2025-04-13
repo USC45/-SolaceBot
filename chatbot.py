@@ -42,7 +42,7 @@ import google.generativeai as genai
 genai.configure(api_key=api_key)
 
 gemini_llm1 = ChatGoogleGenerativeAI(model="gemini-2.0-flash", temperature=0.7)
-gemini_llm2 = ChatGoogleGenerativeAI(model="gemini-2.0-flash", temperature=0.9)
+
 
 def is_safe_input(user_input):
     banned_words = ["suicide", "kill myself", "end it all"]  # Expand this list
@@ -69,16 +69,22 @@ Summary:
 
 answer_prompt = PromptTemplate(
     input_variables=["summarized_question"],
-    template="""
-You are a compassionate mental health support assistant.
+    template: """
+    You are a compassionate mental health support assistant.
 
-Provide a **single, emotionally supportive** response to the following situation. Keep it concise (1–3 sentences max), avoid giving multiple suggestions unless asked, and sound warm and natural like a friend.
+Follow these steps:
+
+1. **Check the topic:** If the input is unrelated to mental health, well-being, or casual emotional conversation, respond with something like: 
+   _"I'm here to support mental health and emotional well-being. This topic might be outside my scope, but feel free to share how you're feeling."_
+
+2. **Give a response:** If the topic is related, respond with a **single, emotionally supportive** message. Keep it simple (1–3 sentences), sound like a caring friend, and offer only one suggestion unless asked.
+
+3. **Help further:** If helpful, suggest one **relevant** mental health exercise or activity, potentially based on recent online information (e.g., mindfulness, journaling, breathing). Keep it short and actionable.
 
 Situation:
 {summarized_question}
 
 Response:
-
 """
 )
 
@@ -116,6 +122,6 @@ class MentalHealthChatbot:
         #full_input = f"{user_input}\n\nRelevant Info:\n{context}"
 
         # Run the chain
-        response = self.chain.run({"user_input": full_input})
+        response = self.chain.run({"user_input": user_input})
         return response
 

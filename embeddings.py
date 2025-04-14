@@ -16,7 +16,7 @@ from langchain_community.vectorstores import Chroma
 # Other imports...
 
 
-os.environ["GOOGLE_API_KEY"] = "AIzaSyA0p-1w5LWhBH3t2DctVzhGhreq1d3qeZc"
+os.environ["GOOGLE_API_KEY"] = "key"
 genai.configure(api_key=os.environ["GOOGLE_API_KEY"])
 
 class GeminiEmbeddings(Embeddings):

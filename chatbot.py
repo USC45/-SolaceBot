@@ -31,7 +31,7 @@ from langchain_google_genai import ChatGoogleGenerativeAI
 import getpass
 import os
 
-os.environ["GOOGLE_API_KEY"] = "AIzaSyA0p-1w5LWhBH3t2DctVzhGhreq1d3qeZc"
+os.environ["GOOGLE_API_KEY"] = "key"
 
 # Now you can use the API key in your code:
 api_key = os.environ["GOOGLE_API_KEY"]

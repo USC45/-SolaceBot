@@ -1,5 +1,5 @@
 import streamlit as st
-from chatbot_core import generate_response, memory
+from chatbot import generate_response, memory
 import time
 import streamlit.components.v1 as components
 
